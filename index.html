@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panthereum — Identity Verification API for Modern Teams</title>
-  <meta name="description" content="Panthereum gives developers a single API to enroll, verify, and identify users by face — in milliseconds. 98.4% accuracy, GDPR compliant." />
+  <title>Panthereum — Biometric Identity Terminal</title>
+  <meta name="description" content="Panthereum is a client-side biometric identity system. Enroll, verify, and identify users by face — no server required." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -216,7 +216,7 @@
       width: 800px;
       height: 800px;
       transform: translate(-50%, -55%);
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; }
@@ -228,19 +228,19 @@
       font-size: 13px;
       font-weight: 500;
       color: var(--text-muted);
-      background: rgba(99, 102, 241, 0.08);
-      border: 1px solid rgba(99, 102, 241, 0.18);
+      background: rgba(201, 168, 76, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.2);
       border-radius: 100px;
       margin-bottom: 28px;
       transition: border-color var(--transition), color var(--transition);
     }
     .hero-pill:hover {
-      border-color: rgba(99, 102, 241, 0.4);
+      border-color: rgba(201, 168, 76, 0.5);
       color: var(--text-primary);
     }
     .hero-pill .pill-arrow {
       font-size: 14px;
-      color: var(--accent);
+      color: var(--gold);
       transition: transform var(--transition);
     }
     .hero-pill:hover .pill-arrow { transform: translateX(3px); }
@@ -253,11 +253,11 @@
       color: #fff;
       margin-bottom: 24px;
     }
-    .hero h1 .accent-word { color: var(--accent); }
+    .hero h1 .accent-word { color: var(--gold); }
     .hero-sub {
       font-size: clamp(16px, 2vw, 18px);
       color: var(--text-muted);
-      max-width: 480px;
+      max-width: 520px;
       margin: 0 auto 40px;
       line-height: 1.7;
     }
@@ -335,7 +335,7 @@
       text-align: center;
       font-size: 13px;
       font-weight: 600;
-      color: var(--accent);
+      color: var(--gold);
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 16px;
@@ -376,7 +376,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(99,102,241,0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
       opacity: 0;
       transition: opacity var(--transition);
     }
@@ -464,15 +464,15 @@
       justify-content: center;
       font-size: 20px;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--gold);
       margin-bottom: 24px;
       position: relative;
       z-index: 1;
       transition: border-color var(--transition), box-shadow var(--transition);
     }
     .step:hover .step-number {
-      border-color: var(--accent);
-      box-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
+      border-color: var(--gold);
+      box-shadow: 0 0 24px rgba(201, 168, 76, 0.15);
     }
     .step h3 {
       font-size: 18px;
@@ -512,8 +512,8 @@
       box-shadow: 0 8px 40px rgba(0,0,0,0.3);
     }
     .pricing-card.featured {
-      border-color: var(--accent);
-      box-shadow: 0 0 40px rgba(99, 102, 241, 0.08);
+      border-color: var(--gold);
+      box-shadow: 0 0 40px rgba(201, 168, 76, 0.08);
     }
     .pricing-badge {
       position: absolute;
@@ -526,7 +526,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       color: #fff;
-      background: var(--accent);
+      background: var(--gold);
       border-radius: 100px;
       white-space: nowrap;
     }
@@ -564,7 +564,7 @@
     }
     .pricing-features li:last-child { border-bottom: none; }
     .pricing-features .check {
-      color: var(--accent);
+      color: var(--gold);
       font-size: 15px;
       flex-shrink: 0;
     }
@@ -643,7 +643,7 @@
       white-space: pre-wrap;
       word-break: break-all;
     }
-    .terminal-body .t-prompt { color: var(--accent); }
+    .terminal-body .t-prompt { color: var(--gold); }
     .terminal-body .t-string { color: #98c379; }
     .terminal-body .t-flag { color: #e5c07b; }
     .terminal-body .t-response { color: #61afef; }
@@ -651,7 +651,7 @@
       display: inline-block;
       width: 8px;
       height: 17px;
-      background: var(--accent);
+      background: var(--gold);
       vertical-align: text-bottom;
       animation: cursor-blink 1s infinite;
       margin-left: 2px;
@@ -743,6 +743,174 @@
       .footer .container { flex-direction: column; text-align: center; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
+
+    /* ===== GATEKEEPER OVERLAY ===== */
+    .gatekeeper-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(6, 6, 10, 0.85);
+      backdrop-filter: blur(24px) saturate(1.2);
+      -webkit-backdrop-filter: blur(24px) saturate(1.2);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 350ms ease, visibility 350ms ease;
+    }
+    .gatekeeper-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .gatekeeper-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 40px 40px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 350ms cubic-bezier(.16,1,.3,1);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 60px rgba(201,168,76,0.04);
+    }
+    .gatekeeper-overlay.active .gatekeeper-card {
+      transform: translateY(0) scale(1);
+    }
+    .gatekeeper-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .gatekeeper-brand .gk-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .gatekeeper-card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .gatekeeper-card .gk-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .gk-input-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .gk-input {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: #fff;
+      background: #0c0c10;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      text-align: center;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .gk-input::placeholder {
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      font-size: 15px;
+    }
+    .gk-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+    .gk-input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+    }
+    .gk-input.success {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+    }
+    .gk-error-msg {
+      font-size: 13px;
+      color: #ef4444;
+      min-height: 20px;
+      margin-bottom: 16px;
+      transition: opacity 200ms ease;
+    }
+    .gk-error-msg:empty { opacity: 0; }
+    .gk-btn-verify {
+      width: 100%;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--gold);
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .gk-btn-verify:hover:not(:disabled) {
+      background: #d4b35a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 24px rgba(201,168,76,0.25);
+    }
+    .gk-btn-verify:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .gk-btn-verify .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: gk-spin 0.6s linear infinite;
+      display: none;
+    }
+    .gk-btn-verify.loading .spinner { display: block; }
+    .gk-btn-verify.loading .btn-text { display: none; }
+    .gk-btn-verify .btn-loading-text { display: none; }
+    .gk-btn-verify.loading .btn-loading-text { display: inline; }
+    @keyframes gk-spin {
+      to { transform: rotate(360deg); }
+    }
+    .gk-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      background: none;
+      transition: color var(--transition);
+    }
+    .gk-back:hover { color: var(--text-muted); }
+    .gk-back svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
   </style>
 </head>
 <body>
@@ -754,12 +922,12 @@
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#docs">Docs</a></li>
+        <li><a href="#docs">How It Works</a></li>
         <li><a href="#changelog">Changelog</a></li>
       </ul>
       <div class="nav-right">
         <button class="nav-sign-in">Sign in</button>
-        <a href="#" class="btn-primary" id="nav-cta">Get API Key</a>
+        <a href="#" class="btn-primary" id="nav-cta">Launch Terminal</a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span>
@@ -773,10 +941,10 @@
   <div class="mobile-menu" id="mobile-menu">
     <a href="#features" class="mobile-link">Features</a>
     <a href="#pricing" class="mobile-link">Pricing</a>
-    <a href="#docs" class="mobile-link">Docs</a>
+    <a href="#docs" class="mobile-link">How It Works</a>
     <a href="#changelog" class="mobile-link">Changelog</a>
     <button class="nav-sign-in mobile-link">Sign in</button>
-    <a href="#" class="btn-primary">Get API Key</a>
+    <a href="#" class="btn-primary">Launch Terminal</a>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -790,41 +958,41 @@
           Try free
         </a>
       </div>
-      <h1 class="reveal">Identity verification<br>for <span class="accent-word">modern teams.</span></h1>
-      <p class="hero-sub reveal">Panthereum gives developers a single API to enroll, verify, and identify users by face — in milliseconds.</p>
+      <h1 class="reveal">Biometric identity<br>for <span class="accent-word">every screen.</span></h1>
+      <p class="hero-sub reveal">Panthereum is a self-contained identity terminal. Enroll users, verify faces, and manage access — all in the browser, no server needed.</p>
       <div class="hero-buttons reveal">
-        <a href="#" class="btn-primary" id="hero-cta">Get your API key</a>
+        <a href="#" class="btn-primary" id="hero-cta">Launch Terminal</a>
         <a href="#" class="btn-secondary">View documentation <span>→</span></a>
       </div>
       <p class="hero-social-proof reveal">
-        Trusted by 200+ developers <span>·</span> 98.4% accuracy <span>·</span> &lt;2s response
+        Client-side processing <span>·</span> Zero server cost <span>·</span> Instant deployment
       </p>
     </div>
   </section>
 
   <!-- ===== LOGO STRIP ===== -->
   <section class="logo-strip">
-    <p class="logo-strip-label reveal">Integrates with your stack</p>
+    <p class="logo-strip-label reveal">Powered by</p>
     <div class="marquee-track">
       <div class="marquee-set">
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 1.85c-.27 0-.55.07-.78.2L3.78 6.35c-.48.28-.78.8-.78 1.36v8.58c0 .56.3 1.08.78 1.36l7.44 4.3c.23.13.5.2.78.2s.55-.07.78-.2l7.44-4.3c.48-.28.78-.8.78-1.36V7.71c0-.56-.3-1.08-.78-1.36l-7.44-4.3c-.23-.13-.5-.2-.78-.2z"/></svg>Node.js</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M9.585 11.692h4.328s2.432.039 2.432-2.35V5.391S16.714 3 11.749 3C6.785 3 7.168 5.016 7.168 5.016v2.664h4.7v.752H6.18S3 8.07 3 12.017s2.78 3.81 2.78 3.81h1.659v-1.834s-.09-2.78 2.735-2.78h.01zm-.466-4.076a.89.89 0 11.002-1.778.89.89 0 01-.002 1.778z"/><path d="M14.415 12.308H10.087s-2.432-.039-2.432 2.35v3.951S7.286 21 12.251 21c4.964 0 4.581-2.016 4.581-2.016v-2.664h-4.7v-.752h5.688S21 15.93 21 11.983s-2.78-3.81-2.78-3.81h-1.659v1.834s.09 2.78-2.735 2.78h-.01zm.466 4.076a.89.89 0 11-.002 1.778.89.89 0 01.002-1.778z"/></svg>Python</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.27 15.53L7 13.8l1.27-1.27 2.46 2.46 5.73-5.73L17.73 10.53l-7 7z"/></svg>React</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 19.5h20L12 2zm0 4l6.9 12H5.1L12 6z"/></svg>Next.js</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83z"/></svg>iOS</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M17.523 2c.508.394.953.85 1.325 1.362l-5.798 3.348a.607.607 0 01-.607 0L6.645 3.362A6.944 6.944 0 017.97 2H17.523zM5.15 4.607c.004.005.008.008.013.013L11.2 8.03v6.613a.607.607 0 01-.304.526L4.5 18.74A6.97 6.97 0 013 14V8.505c0-1.534.504-2.952 1.356-4.098l.794.2zm14.7 0A6.97 6.97 0 0121 8.505V14a6.97 6.97 0 01-1.5 4.34l-6.395-3.17a.606.606 0 01-.305-.526V8.03l6.037-3.41.013-.013zM12.25 16.17l5.798 3.468c-.744.834-1.713 1.468-2.805 1.828L12.607 19.8a.607.607 0 01-.607-.001l-2.636 1.666c-1.092-.36-2.06-.994-2.804-1.828l5.69-3.468z"/></svg>Android</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h4v4H7V7zm6 0h4v4h-4V7zm-6 6h4v4H7v-4zm6 0h4v4h-4v-4z"/></svg>REST API</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12 6v6l4.24 2.54.84-1.4L13 11V6h-2z"/></svg>Webhooks</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>face-api.js</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>SSD MobileNet</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>TinyFaceDetector</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>WebRTC</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>localStorage</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Vanilla JS</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Canvas API</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>CDN Models</span>
       </div>
       <div class="marquee-set" aria-hidden="true">
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 1.85c-.27 0-.55.07-.78.2L3.78 6.35c-.48.28-.78.8-.78 1.36v8.58c0 .56.3 1.08.78 1.36l7.44 4.3c.23.13.5.2.78.2s.55-.07.78-.2l7.44-4.3c.48-.28.78-.8.78-1.36V7.71c0-.56-.3-1.08-.78-1.36l-7.44-4.3c-.23-.13-.5-.2-.78-.2z"/></svg>Node.js</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M9.585 11.692h4.328s2.432.039 2.432-2.35V5.391S16.714 3 11.749 3C6.785 3 7.168 5.016 7.168 5.016v2.664h4.7v.752H6.18S3 8.07 3 12.017s2.78 3.81 2.78 3.81h1.659v-1.834s-.09-2.78 2.735-2.78h.01zm-.466-4.076a.89.89 0 11.002-1.778.89.89 0 01-.002 1.778z"/><path d="M14.415 12.308H10.087s-2.432-.039-2.432 2.35v3.951S7.286 21 12.251 21c4.964 0 4.581-2.016 4.581-2.016v-2.664h-4.7v-.752h5.688S21 15.93 21 11.983s-2.78-3.81-2.78-3.81h-1.659v1.834s.09 2.78-2.735 2.78h-.01zm.466 4.076a.89.89 0 11-.002 1.778.89.89 0 01.002-1.778z"/></svg>Python</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.27 15.53L7 13.8l1.27-1.27 2.46 2.46 5.73-5.73L17.73 10.53l-7 7z"/></svg>React</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 19.5h20L12 2zm0 4l6.9 12H5.1L12 6z"/></svg>Next.js</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83z"/></svg>iOS</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M17.523 2c.508.394.953.85 1.325 1.362l-5.798 3.348a.607.607 0 01-.607 0L6.645 3.362A6.944 6.944 0 017.97 2H17.523zM5.15 4.607c.004.005.008.008.013.013L11.2 8.03v6.613a.607.607 0 01-.304.526L4.5 18.74A6.97 6.97 0 013 14V8.505c0-1.534.504-2.952 1.356-4.098l.794.2zm14.7 0A6.97 6.97 0 0121 8.505V14a6.97 6.97 0 01-1.5 4.34l-6.395-3.17a.606.606 0 01-.305-.526V8.03l6.037-3.41.013-.013zM12.25 16.17l5.798 3.468c-.744.834-1.713 1.468-2.805 1.828L12.607 19.8a.607.607 0 01-.607-.001l-2.636 1.666c-1.092-.36-2.06-.994-2.804-1.828l5.69-3.468z"/></svg>Android</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h4v4H7V7zm6 0h4v4h-4V7zm-6 6h4v4H7v-4zm6 0h4v4h-4v-4z"/></svg>REST API</span>
-        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12 6v6l4.24 2.54.84-1.4L13 11V6h-2z"/></svg>Webhooks</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>face-api.js</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>SSD MobileNet</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>TinyFaceDetector</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>WebRTC</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>localStorage</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Vanilla JS</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Canvas API</span>
+        <span class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>CDN Models</span>
       </div>
     </div>
   </section>
@@ -834,56 +1002,58 @@
     <div class="container">
       <p class="section-label reveal">Features</p>
       <h2 class="section-title reveal">Everything you need to verify identity.</h2>
-      <p class="section-sub reveal">Built for developers who need fast, reliable, and privacy-first face verification.</p>
+      <p class="section-sub reveal">A complete biometric terminal that runs entirely in the browser.</p>
 
       <div class="bento-grid">
-        <!-- WIDE: Built for speed -->
+        <!-- WIDE: Zero server -->
         <div class="bento-card bento-wide reveal">
-          <div class="bento-icon">⚡</div>
-          <h3>Built for speed</h3>
-          <p>Every verification call returns in under 2 seconds. ArcFace embeddings computed server-side, no client lag. Your users never wait.</p>
+          <div class="bento-icon">🖥️</div>
+          <h3>Zero server required</h3>
+          <p>Everything runs client-side. Face detection, descriptor generation, and matching all happen in the browser. No backend, no hosting costs, no latency.</p>
         </div>
 
-        <!-- NARROW: Accuracy -->
+        <!-- NARROW: Real-time detection -->
         <div class="bento-card reveal">
-          <div class="bento-icon">🎯</div>
-          <h3>98.4% accuracy</h3>
-          <p>State-of-the-art ArcFace model. Benchmark tested across diverse datasets for maximum reliability.</p>
+          <div class="bento-icon">👁️</div>
+          <h3>Real-time face tracking</h3>
+          <p>Live camera overlay detects and tracks faces with bounding boxes in real time using TinyFaceDetector.</p>
         </div>
 
-        <!-- NARROW: Zero storage -->
+        <!-- NARROW: Dual modes -->
         <div class="bento-card reveal">
-          <div class="bento-icon">🔐</div>
-          <h3>Zero biometric storage</h3>
-          <p>Face embeddings only. Raw images are never stored, never logged, never retained.</p>
+          <div class="bento-icon">🔀</div>
+          <h3>Two verification modes</h3>
+          <p>Identity mode finds who someone is. Verify mode confirms they are who they claim to be.</p>
         </div>
 
-        <!-- NARROW: Analytics -->
+        <!-- NARROW: Admin panel -->
         <div class="bento-card reveal">
-          <div class="bento-icon">📊</div>
-          <h3>Usage analytics</h3>
-          <p>Track every API call, quota usage, and response time from your dashboard in real time.</p>
+          <div class="bento-icon">⚙️</div>
+          <h3>Built-in admin panel</h3>
+          <p>Enroll users with camera or image upload, manage the database, and view audit logs — all in one interface.</p>
         </div>
 
-        <!-- WIDE: Code snippet -->
+        <!-- WIDE: Architecture -->
         <div class="bento-card bento-wide reveal">
-          <div class="bento-icon">🧑‍💻</div>
-          <h3>3 lines to integrate</h3>
-          <p>No SDK required. Just a fetch call with your API key. Ship facial verification in minutes.</p>
+          <div class="bento-icon">🧠</div>
+          <h3>128-dimensional face descriptors</h3>
+          <p>Each face is converted to a mathematical fingerprint. Matching uses cosine distance with a configurable 0.55 threshold for high accuracy.</p>
           <div class="bento-code">
-            <pre><span class="hl-keyword">const</span> res = <span class="hl-keyword">await</span> <span class="hl-method">fetch</span>(<span class="hl-string">"https://api.panthereum.com/verify"</span>, {
-  <span class="hl-property">method</span>: <span class="hl-string">"POST"</span>,
-  <span class="hl-property">headers</span>: { <span class="hl-string">"X-API-Key"</span>: <span class="hl-string">"pth_your_key"</span> },
-  <span class="hl-property">body</span>: JSON.<span class="hl-method">stringify</span>({ <span class="hl-property">photo_b64</span>: image, <span class="hl-property">member_id</span>: <span class="hl-string">"USR001"</span> })
-});</pre>
+            <pre><span class="hl-keyword">const</span> det = <span class="hl-keyword">await</span> faceapi
+  .<span class="hl-method">detectSingleFace</span>(video)
+  .<span class="hl-method">withFaceLandmarks</span>()
+  .<span class="hl-method">withFaceDescriptor</span>();
+
+<span class="hl-keyword">const</span> match = <span class="hl-method">findMatch</span>(det.descriptor);
+<span class="hl-comment">// → { memberId: "1234567", name: "Rashi", confidence: 98.2 }</span></pre>
           </div>
         </div>
 
-        <!-- NARROW: GDPR -->
+        <!-- NARROW: Privacy -->
         <div class="bento-card reveal">
-          <div class="bento-icon">🌍</div>
-          <h3>GDPR compliant</h3>
-          <p>No raw biometric data retained. Full audit log for every operation. Built for compliance.</p>
+          <div class="bento-icon">🔒</div>
+          <h3>Privacy-first</h3>
+          <p>No raw images stored. Biometric data stays in the user's browser. Full audit trail for every scan.</p>
         </div>
       </div>
     </div>
@@ -894,23 +1064,23 @@
     <div class="container">
       <p class="section-label reveal">How it works</p>
       <h2 class="section-title reveal">Three steps. That's it.</h2>
-      <p class="section-sub reveal">From enrollment to verification in a single API call.</p>
+      <p class="section-sub reveal">From enrollment to verification in a single interface.</p>
 
       <div class="steps">
         <div class="step reveal">
           <div class="step-number">1</div>
           <h3>Enroll</h3>
-          <p>Send a photo + user ID to <code style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px">/enroll</code>. We generate and store a face embedding securely.</p>
+          <p>Open the admin panel, enter a Member ID and name, then capture a photo via camera or upload. A face descriptor is generated and stored locally.</p>
         </div>
         <div class="step reveal">
           <div class="step-number">2</div>
-          <h3>Verify or Identify</h3>
-          <p>Send a live photo to <code style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px">/verify</code> or <code style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px">/identify</code>. We match it against your database.</p>
+          <h3>Scan</h3>
+          <p>Switch to the terminal view. The camera tracks faces in real time. Hit <strong style="color:var(--gold)">Run Verification</strong> to compare against the enrolled database.</p>
         </div>
         <div class="step reveal">
           <div class="step-number">3</div>
           <h3>Get a Result</h3>
-          <p>Receive a JSON response with <code style="color:#98c379;font-family:'JetBrains Mono',monospace;font-size:13px">verified: true/false</code> and a confidence score in milliseconds.</p>
+          <p>See an authorized or denied result with the matched user's name, ID, and confidence score. Every scan is logged for audit.</p>
         </div>
       </div>
     </div>
@@ -930,7 +1100,7 @@
           <div class="pricing-price">$5<span>/month</span></div>
           <ul class="pricing-features">
             <li><span class="check">✓</span> 500 verifications/month</li>
-            <li><span class="check">✓</span> All 3 endpoints</li>
+            <li><span class="check">✓</span> Both scan modes</li>
             <li><span class="check">✓</span> Community support</li>
           </ul>
           <a href="#" class="btn-primary" id="pricing-starter">Get Started</a>
@@ -943,7 +1113,7 @@
           <div class="pricing-price">$15<span>/month</span></div>
           <ul class="pricing-features">
             <li><span class="check">✓</span> 15,000 verifications/month</li>
-            <li><span class="check">✓</span> All 3 endpoints</li>
+            <li><span class="check">✓</span> Both scan modes</li>
             <li><span class="check">✓</span> Email support</li>
             <li><span class="check">✓</span> Priority queue</li>
           </ul>
@@ -956,7 +1126,7 @@
           <div class="pricing-price">$20<span>/month</span></div>
           <ul class="pricing-features">
             <li><span class="check">✓</span> 20,000 verifications/month</li>
-            <li><span class="check">✓</span> All 3 endpoints</li>
+            <li><span class="check">✓</span> Both scan modes</li>
             <li><span class="check">✓</span> Priority support</li>
             <li><span class="check">✓</span> Dedicated onboarding</li>
           </ul>
@@ -976,7 +1146,7 @@
           <span class="terminal-dot red"></span>
           <span class="terminal-dot yellow"></span>
           <span class="terminal-dot green"></span>
-          <span class="terminal-title">terminal — panthereum</span>
+          <span class="terminal-title">panthereum-terminal</span>
         </div>
         <div class="terminal-body">
           <pre id="terminal-text"></pre>
@@ -984,10 +1154,43 @@
       </div>
       <h2 class="reveal">Start verifying in minutes.</h2>
       <div class="reveal">
-        <a href="#" class="btn-primary" id="cta-bottom" style="font-size:16px;padding:14px 28px">Get your free API key <span>→</span></a>
+        <a href="#" class="btn-primary" id="cta-bottom" style="font-size:16px;padding:14px 28px">Launch Terminal <span>→</span></a>
       </div>
     </div>
   </section>
+
+  <!-- ===== GATEKEEPER OVERLAY ===== -->
+  <div class="gatekeeper-overlay" id="gatekeeper">
+    <div class="gatekeeper-card">
+      <div class="gatekeeper-brand">
+        <span class="gk-dot"></span>Panthereum
+      </div>
+      <h2>Enter API Key</h2>
+      <p class="gk-desc">Enter your 9-digit API key to access the Identity Terminal. Your key is validated locally.</p>
+      <div class="gk-input-wrap">
+        <input
+          type="text"
+          class="gk-input"
+          id="gk-input"
+          placeholder="000-000-000"
+          maxlength="11"
+          inputmode="numeric"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+      <div class="gk-error-msg" id="gk-error"></div>
+      <button class="gk-btn-verify" id="gk-verify" disabled>
+        <span class="spinner"></span>
+        <span class="btn-text">Verify &amp; Launch</span>
+        <span class="btn-loading-text">Validating...</span>
+      </button>
+      <button class="gk-back" id="gk-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Home
+      </button>
+    </div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
@@ -997,7 +1200,7 @@
         <span class="footer-copy">© 2026 Panthereum.</span>
       </div>
       <ul class="footer-links">
-        <li><a href="#docs">Docs</a></li>
+        <li><a href="#docs">How It Works</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#">Privacy</a></li>
         <li><a href="#">Terms</a></li>
@@ -1034,7 +1237,6 @@
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          // Stagger the animations slightly for sibling reveals
           const delay = Array.from(entry.target.parentNode.querySelectorAll('.reveal')).indexOf(entry.target) * 80;
           setTimeout(() => {
             entry.target.classList.add('visible');
@@ -1050,36 +1252,24 @@
     const terminalSequences = [
       {
         lines: [
-          { text: '$ ', cls: 't-prompt' },
-          { text: 'curl -X POST https://api.panthereum.com/identify \\', cls: '' },
-          { text: '\n    -H ', cls: '' },
-          { text: '"X-API-Key: pth_••••••••"', cls: 't-string' },
-          { text: ' \\\n    -d ', cls: '' },
-          { text: '\'{"photo_b64": "..."}\'', cls: 't-string' },
+          { text: '> ', cls: 't-prompt' },
+          { text: 'Initializing face-api.js models...', cls: '' },
         ],
-        response: '\n\n<span class="t-response">&gt; { "identified": true, "name": "Avyukt", "confidence": 98.2 }</span>'
+        response: '\n<span class="t-response">✓ SSD MobileNet loaded\n✓ TinyFaceDetector loaded\n✓ FaceLandmark68 loaded\n✓ FaceRecognitionNet loaded</span>'
       },
       {
         lines: [
-          { text: '$ ', cls: 't-prompt' },
-          { text: 'curl -X POST https://api.panthereum.com/verify \\', cls: '' },
-          { text: '\n    -H ', cls: '' },
-          { text: '"X-API-Key: pth_••••••••"', cls: 't-string' },
-          { text: ' \\\n    -d ', cls: '' },
-          { text: '\'{"photo_b64": "...", "member_id": "USR001"}\'', cls: 't-string' },
+          { text: '> ', cls: 't-prompt' },
+          { text: 'Camera: Live · 1280x720 · 30fps', cls: '' },
         ],
-        response: '\n\n<span class="t-response">&gt; { "verified": true, "confidence": 97.8, "latency_ms": 1240 }</span>'
+        response: '\n<span class="t-response">✓ Face detected\n  → Descriptor: 128-dim vector\n  → Matching against 42 enrolled users...</span>'
       },
       {
         lines: [
-          { text: '$ ', cls: 't-prompt' },
-          { text: 'curl -X POST https://api.panthereum.com/enroll \\', cls: '' },
-          { text: '\n    -H ', cls: '' },
-          { text: '"X-API-Key: pth_••••••••"', cls: 't-string' },
-          { text: ' \\\n    -d ', cls: '' },
-          { text: '\'{"photo_b64": "...", "member_id": "USR042", "name": "Rashi"}\'', cls: 't-string' },
+          { text: '> ', cls: 't-prompt' },
+          { text: 'Match found: Rashi (USR0042)', cls: '' },
         ],
-        response: '\n\n<span class="t-response">&gt; { "enrolled": true, "member_id": "USR042", "embedding_stored": true }</span>'
+        response: '\n<span class="t-response">✓ AUTHORIZED\n  → Confidence: 98.2%\n  → Distance: 0.31 (threshold: 0.55)\n  → Logged at 14:32:07</span>'
       }
     ];
 
@@ -1093,12 +1283,10 @@
       const seq = terminalSequences[seqIdx % terminalSequences.length];
       terminalPre.innerHTML = '';
 
-      // Type each fragment
       for (const frag of seq.lines) {
         for (let i = 0; i < frag.text.length; i++) {
           const char = frag.text[i];
           if (frag.cls) {
-            // Find or create the current span
             let currentSpan = terminalPre.querySelector(`span.typing-${frag.cls}`);
             if (!currentSpan) {
               currentSpan = document.createElement('span');
@@ -1107,7 +1295,6 @@
             }
             currentSpan.textContent += char;
           } else {
-            // Append text directly
             const lastNode = terminalPre.lastChild;
             if (lastNode && lastNode.nodeType === 3) {
               lastNode.textContent += char;
@@ -1117,16 +1304,13 @@
           }
           await sleep(18 + Math.random() * 22);
         }
-        // Remove the typing marker class for the next fragment
         const marker = terminalPre.querySelector(`span.typing-${frag.cls}`);
         if (marker) marker.classList.remove(`typing-${frag.cls}`);
       }
 
-      // Add cursor
       terminalPre.innerHTML += '<span class="t-cursor"></span>';
       await sleep(600);
 
-      // Show response
       const cursor = terminalPre.querySelector('.t-cursor');
       if (cursor) cursor.remove();
       terminalPre.innerHTML += seq.response;
@@ -1139,7 +1323,6 @@
 
     function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-    // Start typewriter when terminal is in view
     const terminalObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         typeSequence();
@@ -1148,6 +1331,173 @@
     }, { threshold: 0.3 });
     const terminalWindow = document.querySelector('.terminal-window');
     if (terminalWindow) terminalObserver.observe(terminalWindow);
+
+    /* ===== GATEKEEPER ===== */
+    const gatekeeper = document.getElementById('gatekeeper');
+    const gkInput = document.getElementById('gk-input');
+    const gkError = document.getElementById('gk-error');
+    const gkVerify = document.getElementById('gk-verify');
+    const gkBack = document.getElementById('gk-back');
+
+    const ctaIds = ['nav-cta', 'hero-cta', 'pricing-starter', 'pricing-pro', 'pricing-enterprise', 'cta-bottom'];
+    ctaIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          openGatekeeper();
+        });
+      }
+    });
+
+    document.querySelectorAll('.mobile-menu .btn-primary').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        openGatekeeper();
+      });
+    });
+
+    function openGatekeeper() {
+      gatekeeper.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => gkInput.focus(), 400);
+    }
+
+    function closeGatekeeper() {
+      gatekeeper.classList.remove('active');
+      document.body.style.overflow = '';
+      gkInput.value = '';
+      gkInput.classList.remove('error', 'success');
+      gkError.textContent = '';
+      gkVerify.classList.remove('loading');
+      gkVerify.disabled = true;
+    }
+
+    gkBack.addEventListener('click', closeGatekeeper);
+    gatekeeper.addEventListener('click', (e) => {
+      if (e.target === gatekeeper) closeGatekeeper();
+    });
+
+    function formatDisplay(raw) {
+      const d = raw.replace(/\D/g, '').slice(0, 9);
+      if (d.length <= 3) return d;
+      if (d.length <= 6) return d.slice(0, 3) + '-' + d.slice(3);
+      return d.slice(0, 3) + '-' + d.slice(3, 6) + '-' + d.slice(6);
+    }
+
+    gkInput.addEventListener('input', () => {
+      const cursorPos = gkInput.selectionStart;
+      const rawBefore = gkInput.value.replace(/\D/g, '');
+      const formatted = formatDisplay(rawBefore);
+      const dashesBefore = (formatted.substring(0, Math.max(0, cursorPos - 1)).match(/-/g) || []).length;
+      gkInput.value = formatted;
+      const newCursor = Math.min(cursorPos + ((formatted.length - rawBefore.length) - dashesBefore < 0 ? 0 : (formatted.length - rawBefore.length)), formatted.length);
+      gkInput.setSelectionRange(newCursor, newCursor);
+      const raw = gkInput.value.replace(/\D/g, '');
+      gkInput.classList.remove('error');
+      gkError.textContent = '';
+      gkVerify.disabled = raw.length !== 9;
+    });
+
+    gkInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !gkVerify.disabled) {
+        e.preventDefault();
+        verifyKey();
+      }
+    });
+
+    gkInput.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 9);
+      gkInput.value = formatDisplay(paste);
+      gkInput.dispatchEvent(new Event('input'));
+    });
+
+    gkVerify.addEventListener('click', verifyKey);
+
+      const MASTER_KEY = '000000001';
+
+      async function verifyKey() {
+        const raw = gkInput.value.replace(/\D/g, '');
+        if (!raw) {
+          showError('Please enter your API key.');
+          return;
+        }
+        if (raw.length !== 9 || !/^\d{9}$/.test(raw)) {
+          showError('Invalid format. Enter exactly 9 digits.');
+          return;
+        }
+
+        gkVerify.classList.add('loading');
+        gkVerify.disabled = true;
+        gkError.textContent = '';
+        gkInput.classList.remove('error');
+
+        await sleep(1200 + Math.random() * 800);
+
+        if (raw === MASTER_KEY) {
+          gkInput.classList.remove('error');
+          gkInput.classList.add('success');
+          gkError.textContent = '';
+          gkVerify.classList.remove('loading');
+          await sleep(400);
+          window.location.href = 'Admin Panel';
+          return;
+        }
+
+        const stored = JSON.parse(localStorage.getItem('pth_keys') || '{}');
+        const defaults = {
+          '123456789': { credits: 50, expires: '2027-12-31', name: 'Demo User', plan: 'Starter' },
+          '987654321': { credits: 150, expires: '2027-12-31', name: 'Pro User', plan: 'Pro' },
+          '555123456': { credits: 200, expires: '2027-12-31', name: 'Enterprise', plan: 'Enterprise' },
+          '111222333': { credits: 10, expires: '2025-01-01', name: 'Expired User', plan: 'Starter' },
+          '000000000': { credits: 0, expires: '2027-12-31', name: 'Empty User', plan: 'Starter' }
+        };
+        const allKeys = { ...defaults, ...stored };
+
+        if (!allKeys[raw]) {
+          gkVerify.classList.remove('loading');
+          gkVerify.disabled = false;
+          showError('Invalid API key. Please check and try again.');
+          gkInput.classList.add('error');
+          return;
+        }
+
+        const entry = allKeys[raw];
+        const today = new Date(); today.setHours(0,0,0,0);
+        const expires = new Date(entry.expires); expires.setHours(0,0,0,0);
+        if (today > expires) {
+          gkVerify.classList.remove('loading');
+          gkVerify.disabled = false;
+          showError('This API key has expired. Please request a new one.');
+          gkInput.classList.add('error');
+          return;
+        }
+
+        if (entry.credits <= 0) {
+          gkVerify.classList.remove('loading');
+          gkVerify.disabled = false;
+          showError('No credits remaining on this key.');
+          gkInput.classList.add('error');
+          return;
+        }
+
+        gkInput.classList.remove('error');
+        gkInput.classList.add('success');
+        gkError.textContent = '';
+        gkVerify.classList.remove('loading');
+
+        await sleep(400);
+        window.location.href = 'Current HTML?key=' + raw;
+      }
+
+      function showError(msg) {
+        gkError.textContent = msg;
+        gkInput.classList.add('error');
+      }
   </script>
 </body>
 </html>
